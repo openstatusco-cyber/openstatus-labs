@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>OpenStatus Labs - App Preview</title>
+  <title>OpenStatus – Know Before You Go</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Preview of the OpenStatus mobile app in a clean animated phone mockup." />
+  <meta name="description" content="OpenStatus helps you know what’s open near you before you go. Discover small businesses with live updates." />
 
   <style>
     * {
@@ -15,216 +15,141 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
-      background: #F3F2F2;
+      background: #ffffff;
+      color: #232323;
       min-height: 100vh;
       display: flex;
-      align-items: stretch;
+      align-items: center;
       justify-content: center;
       padding: 24px;
-      color: #232323;
     }
 
-    .shell {
+    .hero-shell {
       max-width: 1120px;
       width: 100%;
-      background: #ffffff;
       border-radius: 32px;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.16);
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.12);
+      padding: 28px 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       body {
         padding: 12px;
       }
-      .shell {
-        grid-template-columns: 1fr;
+      .hero-shell {
         border-radius: 24px;
+        padding: 20px 16px 22px;
       }
     }
 
-    /* Left side - copy */
-    .left {
-      padding: 28px 28px 24px;
-      background: radial-gradient(circle at 0% 0%, #fff2c1, #F8AE9D 40%, #b4c1ef 100%);
+    .top-row {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
     }
 
-    .logo-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.8);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+    .logo {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .logo-dot {
+    .tagline {
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .geo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #F3F2F2;
+      font-size: 0.8rem;
+      color: #333;
+    }
+
+    .geo-dot {
       width: 10px;
       height: 10px;
       border-radius: 999px;
       background: #74a36d;
-      box-shadow: 0 0 0 5px rgba(116,163,109,0.28);
+      box-shadow: 0 0 0 4px rgba(116,163,109,0.25);
+    }
+
+    .content-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr);
+      justify-items: center;
+      text-align: center;
+      gap: 20px;
     }
 
     .headline {
-      font-size: 2rem;
+      font-size: 2.3rem;
       line-height: 1.1;
-      max-width: 360px;
+    }
+
+    .headline span.green {
+      color: #74a36d;
     }
 
     .subcopy {
-      font-size: 0.95rem;
-      color: #333;
-      max-width: 380px;
-    }
-
-    .badges-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .badge-soft {
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.9);
-      color: #232323;
-    }
-
-    .badge-soft span.dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #74a36d;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
       margin-top: 8px;
-      align-items: center;
+      font-size: 0.95rem;
+      color: #444;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .btn-primary {
-      border: none;
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      background: #232323;
-      color: #ffffff;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.3);
-    }
-
-    .btn-primary small {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      opacity: 0.8;
-    }
-
-    .btn-ghost {
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 0.84rem;
-      border: 1px solid rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.4);
-      color: #232323;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Right side - phone */
-    .right {
-      padding: 24px 24px 20px;
-      background: #F3F2F2;
+    .phone-and-map {
+      margin-top: 10px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 16px;
+    }
+
+    /* Phone mockup */
+    .phone-wrapper {
       position: relative;
-      overflow: hidden;
-    }
-
-    .halo {
-      position: absolute;
-      inset: 10% 5% auto auto;
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(116,163,109,0.25), transparent 65%);
-      filter: blur(2px);
-      pointer-events: none;
-      animation: haloPulse 6s ease-in-out infinite;
-    }
-
-    .behind-gradient {
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #fff2c1, #F8AE9D, #b4c1ef);
-      filter: blur(14px);
-      opacity: 0.7;
-      z-index: 0;
-      animation: glowDrift 10s ease-in-out infinite;
-    }
-
-    .phone-container {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      animation: phoneFloat 6s ease-in-out infinite;
+      width: min(320px, 72vw);
+      z-index: 2;
+      animation: phoneFloat 8s ease-in-out infinite;
       transform-origin: center center;
     }
 
     .phone-shadow {
       position: absolute;
-      width: 78%;
-      height: 18px;
-      background: rgba(0,0,0,0.22);
+      width: 70%;
+      height: 16px;
+      background: rgba(0,0,0,0.18);
       filter: blur(12px);
       bottom: 0;
-      transform: translateY(10px);
+      left: 50%;
+      transform: translate(-50%, 10px);
       border-radius: 999px;
       z-index: -1;
-      opacity: 0.9;
-      animation: shadowSquish 6s ease-in-out infinite;
+      animation: shadowSquish 8s ease-in-out infinite;
     }
 
-    .phone {
-      position: relative;
+    .phone-shell {
       width: 100%;
       aspect-ratio: 9 / 19.5;
       border-radius: 38px;
       background: #0f0f10;
       padding: 8px;
       box-shadow:
-        0 18px 40px rgba(0,0,0,0.55),
+        0 18px 40px rgba(0,0,0,0.5),
         0 0 0 1px rgba(255,255,255,0.08);
       display: flex;
       align-items: stretch;
@@ -239,13 +164,6 @@
       background: #000;
     }
 
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
     .island {
       position: absolute;
       top: 10px;
@@ -254,110 +172,335 @@
       width: 110px;
       height: 26px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.86);
+      background: rgba(0,0,0,0.9);
+      z-index: 2;
     }
 
-    .tiny-caption {
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: opacity 0.6s ease-in-out;
+    }
+
+    .phone-screen.fade-out {
+      opacity: 0;
+    }
+
+    .phone-screen.fade-in {
+      opacity: 1;
+    }
+
+    /* subtle background halo */
+    .halo {
+      position: absolute;
+      inset: auto;
+      top: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #fff2c1, #F8AE9D, #b4c1ef);
+      filter: blur(16px);
+      opacity: 0.85;
+      z-index: 0;
+      animation: glowDrift 12s ease-in-out infinite;
+    }
+
+    /* Map card */
+    .map-card {
+      width: min(420px, 100%);
+      border-radius: 22px;
+      border: 1px solid #e4e4e4;
+      overflow: hidden;
+      background: #F3F2F2;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+    }
+
+    .map-header {
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      background: #ffffff;
+    }
+
+    .map-header span.label {
+      font-weight: 600;
+    }
+
+    .map-header span.city {
+      color: #555;
+    }
+
+    .map-header span.pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: #F3F2F2;
+      color: #333;
+    }
+
+    #map {
+      width: 100%;
+      height: 220px;
+    }
+
+    /* Buttons */
+    .buttons-row {
       margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-store {
+      border-radius: 999px;
+      border: 1px solid #232323;
+      padding: 10px 18px;
+      min-width: 190px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: #ffffff;
+      color: #232323;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-store:hover {
+      background: #232323;
+      color: #ffffff;
+    }
+
+    .footnote {
+      margin-top: 4px;
       font-size: 0.75rem;
-      color: #777;
+      color: #888;
       text-align: center;
     }
 
-    /* Animations */
     @keyframes phoneFloat {
       0%   { transform: translateY(0px) rotate(0deg); }
-      25%  { transform: translateY(-8px) rotate(-0.6deg); }
+      25%  { transform: translateY(-8px) rotate(-0.5deg); }
       50%  { transform: translateY(-3px) rotate(0.4deg); }
-      75%  { transform: translateY(-9px) rotate(-0.4deg); }
+      75%  { transform: translateY(-9px) rotate(-0.3deg); }
       100% { transform: translateY(0px) rotate(0deg); }
     }
 
     @keyframes shadowSquish {
-      0%   { transform: translateY(10px) scaleX(1); opacity: 0.90; }
-      25%  { transform: translateY(12px) scaleX(0.92); opacity: 0.80; }
-      50%  { transform: translateY(11px) scaleX(0.96); opacity: 0.85; }
-      75%  { transform: translateY(13px) scaleX(0.90); opacity: 0.78; }
-      100% { transform: translateY(10px) scaleX(1); opacity: 0.90; }
-    }
-
-    @keyframes haloPulse {
-      0%, 100% { opacity: 0.45; transform: scale(1); }
-      50%      { opacity: 0.75; transform: scale(1.05); }
+      0%   { transform: translate(-50%, 10px) scaleX(1); opacity: 0.88; }
+      25%  { transform: translate(-50%, 12px) scaleX(0.93); opacity: 0.82; }
+      50%  { transform: translate(-50%, 11px) scaleX(0.96); opacity: 0.85; }
+      75%  { transform: translate(-50%, 13px) scaleX(0.9); opacity: 0.80; }
+      100% { transform: translate(-50%, 10px) scaleX(1); opacity: 0.88; }
     }
 
     @keyframes glowDrift {
-      0%   { transform: translateX(0px) translateY(0px); }
-      50%  { transform: translateX(10px) translateY(-8px); }
-      100% { transform: translateX(0px) translateY(0px); }
+      0%   { transform: translate(-50%, 0); }
+      50%  { transform: translate(-50%, -10px); }
+      100% { transform: translate(-50%, 0); }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <!-- Left: copy and brand -->
-    <section class="left">
-      <div class="logo-pill">
-        <span class="logo-dot"></span>
-        OpenStatus
+  <div class="hero-shell">
+    <div class="top-row">
+      <div>
+        <div class="logo">OpenStatus</div>
+        <div class="tagline">Know Before You Go</div>
       </div>
 
-      <h1 class="headline">Know before you go, right from your phone.</h1>
-
-      <p class="subcopy">
-        See live updates from local businesses, discover events, and never show up to a closed door again.
-        This preview uses a real OpenStatus app screen.
-      </p>
-
-      <div class="badges-row">
-        <div class="badge-soft">
-          <span class="dot"></span>
-          Built for local explorers
-        </div>
-        <div class="badge-soft">
-          ☕ Cafes • 🚚 Food trucks • 🧘 Studios
-        </div>
+      <div class="geo-pill" id="geoPill">
+        <span class="geo-dot"></span>
+        <span id="geoText">Discover great small businesses near you.</span>
       </div>
+    </div>
 
-      <div class="cta-row">
-        <button class="btn-primary">
-          <div>
-            <small>Available on</small><br />
-            Google Play soon
+    <div class="content-row">
+      <div>
+        <h1 class="headline">
+          See what’s <span class="green">open</span> near you before you leave home.
+        </h1>
+        <p class="subcopy">
+          OpenStatus shows live updates from small businesses in your area – hours, events, and last-minute changes – so you never walk up to a closed door again.
+        </p>
+
+        <div class="phone-and-map">
+          <!-- Phone + halo -->
+          <div style="position:relative; display:inline-block;">
+            <div class="halo"></div>
+
+            <div class="phone-wrapper">
+              <div class="phone-shadow"></div>
+              <div class="phone-shell">
+                <div class="phone-inner">
+                  <div class="island"></div>
+                  <!-- SLIDESHOW INSIDE PHONE -->
+                  <img
+                    id="phoneScreen"
+                    src="./IMG_8313.PNG"
+                    alt="OpenStatus app screen"
+                    class="phone-screen"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-        </button>
-        <button class="btn-ghost">
-          👀 Preview the app
-        </button>
-      </div>
-    </section>
 
-    <!-- Right: animated phone mockup -->
-    <section class="right">
-      <div class="halo"></div>
-      <div class="behind-gradient"></div>
+          <!-- Map card -->
+          <div class="map-card">
+            <div class="map-header">
+              <div>
+                <span class="label">Small businesses near</span>
+                <span class="city" id="cityLabel">your city</span>
+              </div>
+              <span class="pill">Live map preview</span>
+            </div>
+            <div id="map"></div>
+          </div>
 
-      <div class="phone-container">
-        <div class="phone-shadow"></div>
+          <!-- Download buttons -->
+          <div class="buttons-row">
+            <a href="#" class="btn-store" id="googlePlayBtn">
+              Google Play Store
+            </a>
+            <a href="#" class="btn-store" id="appleStoreBtn">
+              Apple App Store
+            </a>
+          </div>
 
-        <div class="phone">
-          <div class="phone-inner">
-            <div class="island"></div>
-
-            <!-- IMPORTANT: this uses your screenshot file -->
-            <img
-              src="./IMG_8314.PNG"
-              alt="OpenStatus app screenshot"
-              class="phone-screen"
-            />
+          <div class="footnote">
+            Links are placeholders – swap in your real store URLs when you’re ready.
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <p class="tiny-caption">
-        Screen from the OpenStatus app • swap IMG_8314.PNG to change this preview.
-      </p>
-    </section>
-  </main>
+  <script>
+    // ------- Image slider inside phone -------
+    const phoneImages = ["./IMG_8313.PNG", "./IMG_8314.PNG"];
+    let currentIndex = 0;
+    const phoneScreen = document.getElementById("phoneScreen");
+
+    function cycleScreens() {
+      currentIndex = (currentIndex + 1) % phoneImages.length;
+      phoneScreen.classList.remove("fade-in");
+      phoneScreen.classList.add("fade-out");
+
+      setTimeout(() => {
+        phoneScreen.src = phoneImages[currentIndex];
+        phoneScreen.classList.remove("fade-out");
+        phoneScreen.classList.add("fade-in");
+      }, 260); // matches CSS transition timing
+    }
+
+    phoneScreen.classList.add("fade-in");
+    setInterval(cycleScreens, 3500);
+
+    // ------- Geolocation + Map -------
+    let map;
+    let userLatLng = null;
+
+    function initMap() {
+      // Default center: Franklin / TN-ish
+      const defaultCenter = { lat: 35.9253, lng: -86.8689 };
+
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: defaultCenter,
+        zoom: 10,
+        disableDefaultUI: true,
+        gestureHandling: "greedy",
+        styles: [
+          {
+            featureType: "all",
+            elementType: "geometry",
+            stylers: [{ color: "#F3F2F2" }]
+          },
+          {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [{ color: "#ffffff" }]
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [{ color: "#d2e3fc" }]
+          }
+        ]
+      });
+
+      // If we already got user location, recenter
+      if (userLatLng) {
+        centerMapOnUser(userLatLng);
+      }
+    }
+
+    function centerMapOnUser(coords) {
+      if (!map) return;
+      map.setZoom(12);
+      map.setCenter(coords);
+
+      new google.maps.Marker({
+        position: coords,
+        map,
+        title: "You are here",
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 8,
+          fillColor: "#74a36d",
+          fillOpacity: 1,
+          strokeWeight: 2,
+          strokeColor: "#ffffff"
+        }
+      });
+    }
+
+    function updateGeoText(cityText) {
+      const geoText = document.getElementById("geoText");
+      const cityLabel = document.getElementById("cityLabel");
+
+      if (cityText) {
+        geoText.textContent = `There are lots of great small businesses in ${cityText}.`;
+        cityLabel.textContent = cityText;
+      } else {
+        geoText.textContent = "Discover great small businesses near you.";
+        cityLabel.textContent = "your city";
+      }
+    }
+
+    // Ask for browser location on load
+    document.addEventListener("DOMContentLoaded", () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            userLatLng = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            // Simple generic city text – we won’t do reverse geocoding here
+            updateGeoText("your area");
+            if (map) {
+              centerMapOnUser(userLatLng);
+            }
+          },
+          () => {
+            // User denied or error
+            updateGeoText(null);
+          }
+        );
+      } else {
+        updateGeoText(null);
+      }
+    });
+  </script>
+
+  <!-- Google Maps JS (uses your key) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF7OU8d3VUhHYElrNxCnnaTXnTHRsPnz0&callback=initMap" async defer></script>
 </body>
 </html>
