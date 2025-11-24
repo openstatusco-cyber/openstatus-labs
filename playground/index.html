@@ -42,46 +42,89 @@
       animation: glowDrift 12s ease-in-out infinite;
     }
 
-    /* PHONE WRAPPER */
-    .phone-wrapper {
-      position: relative;
-      width: min(260px, 65vw);
-      z-index: 2;
-      animation: phoneFloat 8s ease-in-out infinite;
-    }
+    /* PHONE WRAPPER (WIDER + BETTER BODY) */
+.phone-wrapper {
+  position: relative;
+  width: min(300px, 72vw);     /* wider phone */
+  z-index: 2;
+  animation: phoneFloat 8s ease-in-out infinite;
+}
 
-    .phone-shadow {
-      position: absolute;
-      width: 70%;
-      height: 14px;
-      background: rgba(0,0,0,0.18);
-      filter: blur(10px);
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 999px;
-      z-index: -1;
-      animation: shadowSquish 8s ease-in-out infinite;
-    }
+/* Stronger body shadow */
+.phone-shadow {
+  position: absolute;
+  width: 78%;
+  height: 18px;
+  background: rgba(0,0,0,0.22);
+  filter: blur(12px);
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  z-index: -1;
+  animation: shadowSquish 8s ease-in-out infinite;
+}
 
-    .phone-shell {
-      width: 100%;
-      aspect-ratio: 9 / 19.5;
-      border-radius: 34px;
-      background: #0f0f10;
-      padding: 6px;
-      box-shadow:
-        0 14px 28px rgba(0,0,0,0.45),
-        0 0 0 1px rgba(255,255,255,0.08);
-      display: flex;
-    }
+/* WIDER + THICKER PHONE BODY */
+.phone-shell {
+  width: 100%;
+  aspect-ratio: 9 / 17;         /* less tall, more wide */
+  border-radius: 44px;          /* thicker radius */
+  background: #0f0f10;
+  padding: 10px;                /* thicker outer bezel */
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.55),
+    0 0 0 2px rgba(255,255,255,0.08),   /* body outline */
+    inset 0 0 0 3px #1a1a1a;            /* inner bevel like real phone */
+  display: flex;
+  position: relative;
+}
 
-    .phone-inner {
-      width: 100%;
-      border-radius: 26px;
-      overflow: hidden;
-      position: relative;
-      background: #000;
+/* SIDE “METAL” RAIL EFFECT */
+.phone-shell:before,
+.phone-shell:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(#555, #333);
+  opacity: 0.2;
+}
+
+.phone-shell:before { left: -4px; border-radius: 4px; }
+.phone-shell:after  { right: -4px; border-radius: 4px; }
+
+/* INNER SCREEN */
+.phone-inner {
+  width: 100%;
+  border-radius: 34px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+  position: relative;
+}
+
+/* DYNAMIC ISLAND, MORE ACCURATE */
+.island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.92);
+  z-index: 10;
+}
+
+/* MOBILE FIX: make phone smaller on very small screens */
+@media (max-width: 480px) {
+  .phone-wrapper {
+    width: 68vw;
+  }
+}
+
     }
 
     .island {
