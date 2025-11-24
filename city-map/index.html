@@ -22,7 +22,7 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh; /* full viewport hero */
+      height: 100vh;
       overflow: hidden;
     }
 
@@ -35,17 +35,19 @@
       z-index: 0;
     }
 
-    /* Soft gradient overlay so text is readable */
+    /* OpenStatus color tint over map */
     .overlay-gradient {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.9), transparent 50%),
-                  linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.8) 38%, rgba(255,255,255,0) 70%);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,242,193,0.9), transparent 55%),
+        radial-gradient(circle at 80% 100%, rgba(180,193,239,0.7), transparent 55%),
+        linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.85) 35%, transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
 
-    /* CONTENT ON TOP OF MAP */
+    /* CONTENT LAYER */
     .hero-inner {
       position: relative;
       z-index: 2;
@@ -57,7 +59,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 24px;
     }
 
     @media (max-width: 900px) {
@@ -69,9 +71,13 @@
       }
     }
 
-    /* LEFT TEXT BLOCK */
+    /* LEFT TEXT */
     .text-block {
-      max-width: 480px;
+      max-width: 500px;
+      background: rgba(255,255,255,0.94);
+      padding: 16px 18px 18px;
+      border-radius: 20px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.12);
     }
 
     .pill {
@@ -80,7 +86,7 @@
       gap: 8px;
       padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.9);
+      background: #F3F2F2;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -96,10 +102,10 @@
     }
 
     .headline {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       line-height: 1.1;
       margin-bottom: 8px;
-      min-height: 2.6em; /* space for typewriter line */
+      min-height: 2.6em;
     }
 
     .headline span.city {
@@ -156,10 +162,11 @@
       }
       .text-block {
         max-width: 100%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
       }
     }
 
-    /* RIGHT: FLOATING PHONE OVER MAP */
+    /* RIGHT - IPHONE 17 STYLE FLOATING PHONE */
     .phone-block {
       position: relative;
       flex: 0 0 auto;
@@ -171,18 +178,18 @@
 
     .phone-wrapper {
       position: relative;
-      width: min(280px, 65vw);
+      width: min(290px, 62vw);
       animation: phoneFloat 8s ease-in-out infinite;
       transform-origin: center center;
     }
 
     .phone-shadow {
       position: absolute;
-      width: 70%;
+      width: 72%;
       height: 18px;
-      background: rgba(0,0,0,0.26);
+      background: rgba(0,0,0,0.28);
       filter: blur(12px);
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
       border-radius: 999px;
@@ -193,12 +200,12 @@
     .phone-shell {
       width: 100%;
       aspect-ratio: 9 / 18;
-      border-radius: 40px;
-      background: #050505;
+      border-radius: 42px;
       padding: 8px;
+      background: radial-gradient(circle at 0% 0%, #f7f7f7, #c8c8c8);
       box-shadow:
-        0 18px 40px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(255,255,255,0.08);
+        0 18px 45px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.7);
       display: flex;
       align-items: stretch;
       justify-content: center;
@@ -206,20 +213,23 @@
 
     .phone-inner {
       width: 100%;
-      border-radius: 30px;
+      border-radius: 34px;
       overflow: hidden;
       position: relative;
       background: #000;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
     }
 
+    /* Dynamic island for iPhone 17 look */
     .island {
       position: absolute;
-      top: 10px;
+      top: 12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 110px;
-      height: 28px;
+      width: 118px;
+      height: 30px;
       border-radius: 999px;
       background: rgba(0,0,0,0.92);
       z-index: 5;
@@ -230,22 +240,18 @@
       height: 100%;
       display: block;
       object-fit: cover;
-      object-position: center 40px; /* move screenshot down a bit */
-      transition: opacity 0.6s ease-in-out;
+      object-position: center 40px;
     }
 
-    .phone-screen.fade-out { opacity: 0; }
-    .phone-screen.fade-in  { opacity: 1; }
-
-    /* Tiny bubble near phone */
+    /* Little badge near phone */
     .phone-badge {
       position: absolute;
-      bottom: -12px;
-      right: -8px;
+      bottom: -14px;
+      right: -4px;
       padding: 6px 10px;
       border-radius: 999px;
       background: rgba(255,255,255,0.96);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.2);
       font-size: 0.76rem;
       display: flex;
       align-items: center;
@@ -261,21 +267,18 @@
     }
 
     @media (max-width: 900px) {
-      .hero-inner {
-        align-items: flex-start;
-      }
       .phone-block {
         width: 100%;
         justify-content: center;
         margin-top: 10px;
       }
       .phone-wrapper {
-        width: 56vw;
+        width: 58vw;
         max-width: 260px;
       }
       .phone-badge {
         bottom: -10px;
-        right: 8px;
+        right: 10px;
       }
     }
 
@@ -303,7 +306,7 @@
     <div class="overlay-gradient"></div>
 
     <div class="hero-inner">
-      <!-- LEFT: TEXT -->
+      <!-- LEFT TEXT -->
       <div class="text-block">
         <div class="pill">
           <span class="pill-dot"></span>
@@ -315,12 +318,12 @@
         </h1>
 
         <p class="subcopy">
-          OpenStatus shows live updates from small businesses in your area – hours, last-minute changes,
-          pop-ups, and more – so you always know what’s open before you go.
+          OpenStatus shows live updates from small businesses in your area - hours, last minute changes,
+          pop ups, and more - so you always know what is open before you go.
         </p>
 
         <p class="city-line" id="cityLine">
-          We’ll use your location to find great spots near you.
+          We will use your location to find great spots near you.
         </p>
 
         <div class="buttons-row">
@@ -329,11 +332,11 @@
         </div>
 
         <p class="footnote">
-          Store links are placeholders – swap them for your real download URLs when you’re ready.
+          Store links are placeholders - swap them for your real download URLs when you are ready.
         </p>
       </div>
 
-      <!-- RIGHT: FLOATING PHONE OVER MAP -->
+      <!-- RIGHT - IPHONE 17 OVER MAP -->
       <div class="phone-block">
         <div class="phone-wrapper">
           <div class="phone-shadow"></div>
@@ -341,9 +344,8 @@
             <div class="phone-inner">
               <div class="island"></div>
               <img
-                id="phoneScreen"
-                src="../IMG_8313.PNG"
-                alt="OpenStatus screen"
+                src="./IMG_8314.PNG"
+                alt="OpenStatus app screen"
                 class="phone-screen"
               />
             </div>
@@ -358,30 +360,7 @@
   </section>
 
   <script>
-    // ---------- PHONE SLIDESHOW ----------
-    const images = ["../IMG_8313.PNG", "../IMG_8314.PNG"];
-    let index = 0;
-    const screen = document.getElementById("phoneScreen");
-
-    function swapScreen() {
-      index = (index + 1) % images.length;
-      screen.classList.remove("fade-in");
-      screen.classList.add("fade-out");
-
-      setTimeout(() => {
-        screen.src = images[index];
-        screen.classList.remove("fade-out");
-        screen.classList.add("fade-in");
-      }, 260);
-    }
-
-    screen.classList.add("fade-in");
-    setInterval(swapScreen, 3500);
-
-    // ---------- MAP + GEO + CITY NAME ----------
-    let map;
-    let geocoder;
-
+    // Typewriter effect for headline
     function typeWriter(text) {
       const el = document.getElementById("headline");
       el.textContent = "";
@@ -397,6 +376,9 @@
       tick();
     }
 
+    let map;
+    let geocoder;
+
     function initMap() {
       const defaultCenter = { lat: 35.9253, lng: -86.8689 };
 
@@ -406,9 +388,13 @@
         disableDefaultUI: true,
         styles: [
           {
-            featureType: "all",
             elementType: "geometry",
             stylers: [{ color: "#F3F2F2" }]
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [{ color: "#b4c1ef" }]
           },
           {
             featureType: "road",
@@ -416,9 +402,24 @@
             stylers: [{ color: "#ffffff" }]
           },
           {
-            featureType: "water",
+            featureType: "poi",
             elementType: "geometry",
-            stylers: [{ color: "#d2e3fc" }]
+            stylers: [{ color: "#fff2c1" }]
+          },
+          {
+            featureType: "poi.park",
+            elementType: "geometry",
+            stylers: [{ color: "#74a36d" }]
+          },
+          {
+            featureType: "administrative",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#555555" }]
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#777777" }]
           }
         ]
       });
@@ -451,7 +452,7 @@
       new google.maps.Marker({
         position: coords,
         map,
-        title: "You’re here",
+        title: "You are here",
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
           scale: 8,
@@ -480,7 +481,7 @@
           const cityState = city && state ? `${city}, ${state}` : city || state || "your area";
 
           document.getElementById("cityLine").textContent =
-            `Right now we’re looking around ${cityState} for small businesses.`;
+            `Right now we are looking around ${cityState} for small businesses.`;
 
           typeWriter(`Hey, we love your city, ${cityState}.`);
         } else {
@@ -494,4 +495,3 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF7OU8d3VUhHYElrNxCnnaTXnTHRsPnz0&callback=initMap" async defer></script>
 </body>
 </html>
-
