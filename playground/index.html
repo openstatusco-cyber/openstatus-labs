@@ -6,137 +6,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    /* TRANSPARENT BACKGROUND */
+    /* Transparent so Squarespace background shows through */
     body {
       background: transparent;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
+      overflow: hidden;
     }
 
     .stage {
       position: relative;
       width: 100%;
-      height: 100%;
       max-width: 420px;
+      height: 100%;
+      max-height: 640px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Smaller halo so it doesn't overpower white backgrounds */
+    /* Soft glow behind phone */
     .halo {
       position: absolute;
-      width: 220px;
-      height: 220px;
+      width: 230px;
+      height: 230px;
       border-radius: 999px;
       background: radial-gradient(circle, #fff2c1, #F8AE9D, #b4c1ef);
-      filter: blur(14px);
-      opacity: 0.7;
+      filter: blur(16px);
+      opacity: 0.8;
       z-index: 0;
       animation: glowDrift 12s ease-in-out infinite;
     }
 
-    /* PHONE WRAPPER (WIDER + BETTER BODY) */
-.phone-wrapper {
-  position: relative;
-  width: min(300px, 72vw);     /* wider phone */
-  z-index: 2;
-  animation: phoneFloat 8s ease-in-out infinite;
-}
-
-/* Stronger body shadow */
-.phone-shadow {
-  position: absolute;
-  width: 78%;
-  height: 18px;
-  background: rgba(0,0,0,0.22);
-  filter: blur(12px);
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  z-index: -1;
-  animation: shadowSquish 8s ease-in-out infinite;
-}
-
-/* WIDER + THICKER PHONE BODY */
-.phone-shell {
-  width: 100%;
-  aspect-ratio: 9 / 17;         /* less tall, more wide */
-  border-radius: 44px;          /* thicker radius */
-  background: #0f0f10;
-  padding: 10px;                /* thicker outer bezel */
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.55),
-    0 0 0 2px rgba(255,255,255,0.08),   /* body outline */
-    inset 0 0 0 3px #1a1a1a;            /* inner bevel like real phone */
-  display: flex;
-  position: relative;
-}
-
-/* SIDE “METAL” RAIL EFFECT */
-.phone-shell:before,
-.phone-shell:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 6px;
-  height: 100%;
-  background: linear-gradient(#555, #333);
-  opacity: 0.2;
-}
-
-.phone-shell:before { left: -4px; border-radius: 4px; }
-.phone-shell:after  { right: -4px; border-radius: 4px; }
-
-/* INNER SCREEN */
-.phone-inner {
-  width: 100%;
-  border-radius: 34px;
-  overflow: hidden;
-  background: #000;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
-  position: relative;
-}
-
-/* DYNAMIC ISLAND, MORE ACCURATE */
-.island {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 32px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.92);
-  z-index: 10;
-}
-
-/* MOBILE FIX: make phone smaller on very small screens */
-@media (max-width: 480px) {
-  .phone-wrapper {
-    width: 68vw;
-  }
-}
-
+    /* PHONE WRAPPER – this controls size */
+    .phone-wrapper {
+      position: relative;
+      width: min(280px, 68vw);  /* not super skinny, scales on mobile */
+      z-index: 2;
+      animation: phoneFloat 8s ease-in-out infinite;
+      transform-origin: center center;
     }
 
-    .island {
+    .phone-shadow {
       position: absolute;
-      top: 8px;
+      width: 70%;
+      height: 18px;
+      background: rgba(0,0,0,0.2);
+      filter: blur(12px);
+      bottom: -6px;
       left: 50%;
       transform: translateX(-50%);
-      width: 90px;
-      height: 22px;
+      border-radius: 999px;
+      z-index: -1;
+      animation: shadowSquish 8s ease-in-out infinite;
+    }
+
+    /* Phone body */
+    .phone-shell {
+      width: 100%;
+      aspect-ratio: 9 / 18;        /* slightly wider than before */
+      border-radius: 40px;
+      background: #050505;
+      padding: 8px;
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(255,255,255,0.08);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    /* Screen area */
+    .phone-inner {
+      width: 100%;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+    }
+
+    /* Dynamic island */
+    .island {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 28px;
       border-radius: 999px;
       background: rgba(0,0,0,0.92);
-      z-index: 10;
+      z-index: 5;
     }
 
     .phone-screen {
@@ -148,17 +117,17 @@
     }
 
     .phone-screen.fade-out { opacity: 0; }
-    .phone-screen.fade-in { opacity: 1; }
+    .phone-screen.fade-in  { opacity: 1; }
 
-    /* BUBBLES (smaller for mobile friendliness) */
+    /* Bubbles */
     .bubble {
       position: absolute;
-      max-width: 180px;
+      max-width: 190px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.95);
       box-shadow: 0 10px 26px rgba(0,0,0,0.12);
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -172,22 +141,23 @@
       height: 8px;
       border-radius: 999px;
       background: #74a36d;
+      box-shadow: 0 0 0 3px rgba(116,163,109,0.23);
     }
 
     .bubble-1 {
-      top: 8%;
-      left: 0%;
+      top: 9%;
+      left: -4%;
       animation: bubbleFloat 7s ease-in-out infinite 0.4s;
     }
 
     .bubble-2 {
-      top: 55%;
-      right: -4%;
-      animation: bubbleFloat 7.5s ease-in-out infinite 1.2s;
+      top: 54%;
+      right: -6%;
+      animation: bubbleFloat 7.6s ease-in-out infinite 1.2s;
     }
 
     .bubble-3 {
-      bottom: 4%;
+      bottom: 6%;
       left: -6%;
       animation: bubbleFloat 8s ease-in-out infinite 2s;
     }
@@ -195,16 +165,16 @@
     /* Animations */
     @keyframes phoneFloat {
       0%   { transform: translateY(0px) rotate(0deg); }
-      25%  { transform: translateY(-6px) rotate(-0.4deg); }
-      50%  { transform: translateY(-3px) rotate(0.4deg); }
-      75%  { transform: translateY(-7px) rotate(-0.3deg); }
+      25%  { transform: translateY(-7px) rotate(-0.45deg); }
+      50%  { transform: translateY(-3px) rotate(0.35deg); }
+      75%  { transform: translateY(-8px) rotate(-0.3deg); }
       100% { transform: translateY(0px) rotate(0deg); }
     }
 
     @keyframes shadowSquish {
       0%   { transform: translateX(-50%) scaleX(1); }
       25%  { transform: translateX(-50%) scaleX(0.93); }
-      50%  { transform: translateX(-50%) scaleX(0.96); }
+      50%  { transform: translateX(-50%) scaleX(0.97); }
       75%  { transform: translateX(-50%) scaleX(0.9); }
       100% { transform: translateX(-50%) scaleX(1); }
     }
@@ -222,11 +192,23 @@
       85%  { opacity: 1; }
       100% { transform: translateY(8px); opacity: 0; }
     }
+
+    /* Extra mobile tweaks */
+    @media (max-width: 480px) {
+      .stage {
+        max-height: 520px;
+      }
+      .phone-wrapper {
+        width: 64vw;
+      }
+      .bubble-1 { left: -6%; }
+      .bubble-2 { right: -8%; }
+      .bubble-3 { left: -8%; bottom: 8%; }
+    }
   </style>
 </head>
 <body>
   <div class="stage">
-
     <div class="halo"></div>
 
     <div class="phone-wrapper">
@@ -236,50 +218,53 @@
         <div class="phone-inner">
           <div class="island"></div>
 
-          <img id="phoneScreen"
-               src="./IMG_8313.PNG"
-               class="phone-screen" />
+          <img
+            id="phoneScreen"
+            src="./IMG_8313.PNG"
+            alt="OpenStatus app screen"
+            class="phone-screen"
+          />
         </div>
       </div>
     </div>
 
-    <!-- Notification bubbles -->
+    <!-- Bubbles -->
     <div class="bubble bubble-1">
       <span class="bubble-dot"></span>
-      Open near you right now.
+      Open places near you, in real time.
     </div>
 
     <div class="bubble bubble-2">
       <span class="bubble-dot"></span>
-      Bodee just posted an update.
+      “Bodee” just posted a new update.
     </div>
 
     <div class="bubble bubble-3">
       <span class="bubble-dot"></span>
-      Discover local small businesses.
+      Discover local small businesses before you go.
     </div>
-
   </div>
 
   <script>
-    // Slide between your two images
-    const imgs = ["./IMG_8313.PNG", "./IMG_8314.PNG"];
-    let i = 0;
+    // simple cross-fade slideshow between your two screenshots
+    const images = ["./IMG_8313.PNG", "./IMG_8314.PNG"];
+    let index = 0;
     const screen = document.getElementById("phoneScreen");
 
-    function swap() {
-      i = (i + 1) % imgs.length;
+    function swapScreen() {
+      index = (index + 1) % images.length;
+      screen.classList.remove("fade-in");
       screen.classList.add("fade-out");
 
       setTimeout(() => {
-        screen.src = imgs[i];
+        screen.src = images[index];
         screen.classList.remove("fade-out");
         screen.classList.add("fade-in");
       }, 260);
     }
 
     screen.classList.add("fade-in");
-    setInterval(swap, 3500);
+    setInterval(swapScreen, 3500);
   </script>
 </body>
 </html>
