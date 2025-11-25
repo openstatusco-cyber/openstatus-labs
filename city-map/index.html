@@ -26,7 +26,7 @@
       overflow: hidden;
     }
 
-    /* MAP BACKGROUND */
+    /* Map as background */
     #map {
       position: absolute;
       inset: 0;
@@ -35,7 +35,7 @@
       z-index: 0;
     }
 
-    /* OpenStatus color tint over map */
+    /* Brand color tint over map */
     .overlay-gradient {
       position: absolute;
       inset: 0;
@@ -47,7 +47,7 @@
       z-index: 1;
     }
 
-    /* CONTENT LAYER */
+    /* Content layer */
     .hero-inner {
       position: relative;
       z-index: 2;
@@ -71,9 +71,9 @@
       }
     }
 
-    /* LEFT TEXT */
+    /* Left text card */
     .text-block {
-      max-width: 500px;
+      max-width: 520px;
       background: rgba(255,255,255,0.94);
       padding: 16px 18px 18px;
       border-radius: 20px;
@@ -105,7 +105,7 @@
       font-size: 2.1rem;
       line-height: 1.1;
       margin-bottom: 8px;
-      min-height: 2.6em;
+      min-height: 2.6em; /* room for typewriter */
     }
 
     .headline span.city {
@@ -166,8 +166,8 @@
       }
     }
 
-    /* RIGHT - IPHONE 17 STYLE FLOATING PHONE */
-    .phone-block {
+    /* Right: floating app card instead of fake phone */
+    .app-block {
       position: relative;
       flex: 0 0 auto;
       display: flex;
@@ -176,14 +176,14 @@
       pointer-events: none;
     }
 
-    .phone-wrapper {
+    .app-card-wrapper {
       position: relative;
-      width: min(290px, 62vw);
-      animation: phoneFloat 8s ease-in-out infinite;
+      width: min(320px, 62vw);
+      animation: cardFloat 8s ease-in-out infinite;
       transform-origin: center center;
     }
 
-    .phone-shadow {
+    .app-card-shadow {
       position: absolute;
       width: 72%;
       height: 18px;
@@ -197,54 +197,27 @@
       animation: shadowSquish 8s ease-in-out infinite;
     }
 
-    .phone-shell {
+    .app-card {
       width: 100%;
       aspect-ratio: 9 / 18;
-      border-radius: 42px;
-      padding: 8px;
-      background: radial-gradient(circle at 0% 0%, #f7f7f7, #c8c8c8);
-      box-shadow:
-        0 18px 45px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(255,255,255,0.7);
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-    }
-
-    .phone-inner {
-      width: 100%;
-      border-radius: 34px;
+      border-radius: 32px;
       overflow: hidden;
-      position: relative;
       background: #000;
       box-shadow:
-        0 0 0 1px rgba(0,0,0,0.8),
-        inset 0 0 0 1px rgba(255,255,255,0.06);
+        0 18px 45px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(0,0,0,0.08);
+      position: relative;
     }
 
-    /* Dynamic island for iPhone 17 look */
-    .island {
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 118px;
-      height: 30px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.92);
-      z-index: 5;
-    }
-
-    .phone-screen {
+    .app-screen {
       width: 100%;
       height: 100%;
-      display: block;
       object-fit: cover;
-      object-position: center 40px;
+      object-position: center 20px; /* adjust vertical position of screenshot */
+      display: block;
     }
 
-    /* Little badge near phone */
-    .phone-badge {
+    .app-pill {
       position: absolute;
       bottom: -14px;
       right: -4px;
@@ -259,7 +232,7 @@
       pointer-events: auto;
     }
 
-    .phone-badge-dot {
+    .app-pill-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
@@ -267,23 +240,23 @@
     }
 
     @media (max-width: 900px) {
-      .phone-block {
+      .app-block {
         width: 100%;
         justify-content: center;
         margin-top: 10px;
       }
-      .phone-wrapper {
+      .app-card-wrapper {
         width: 58vw;
         max-width: 260px;
       }
-      .phone-badge {
+      .app-pill {
         bottom: -10px;
         right: 10px;
       }
     }
 
     /* Animations */
-    @keyframes phoneFloat {
+    @keyframes cardFloat {
       0%   { transform: translateY(0px) rotate(0deg); }
       25%  { transform: translateY(-7px) rotate(-0.45deg); }
       50%  { transform: translateY(-3px) rotate(0.35deg); }
@@ -306,7 +279,7 @@
     <div class="overlay-gradient"></div>
 
     <div class="hero-inner">
-      <!-- LEFT TEXT -->
+      <!-- LEFT: TEXT -->
       <div class="text-block">
         <div class="pill">
           <span class="pill-dot"></span>
@@ -319,7 +292,7 @@
 
         <p class="subcopy">
           OpenStatus shows live updates from small businesses in your area - hours, last minute changes,
-          pop ups, and more - so you always know what is open before you go.
+          pop ups, and more, so you always know what is open before you go.
         </p>
 
         <p class="city-line" id="cityLine">
@@ -336,22 +309,19 @@
         </p>
       </div>
 
-      <!-- RIGHT - IPHONE 17 OVER MAP -->
-      <div class="phone-block">
-        <div class="phone-wrapper">
-          <div class="phone-shadow"></div>
-          <div class="phone-shell">
-            <div class="phone-inner">
-              <div class="island"></div>
-              <img
-                src="./IMG_8314.PNG"
-                alt="OpenStatus app screen"
-                class="phone-screen"
-              />
-            </div>
+      <!-- RIGHT: FLOATING APP CARD -->
+      <div class="app-block">
+        <div class="app-card-wrapper">
+          <div class="app-card-shadow"></div>
+          <div class="app-card">
+            <img
+              src="./IMG_8314.PNG"
+              alt="OpenStatus app screen"
+              class="app-screen"
+            />
           </div>
-          <div class="phone-badge">
-            <span class="phone-badge-dot"></span>
+          <div class="app-pill">
+            <span class="app-pill-dot"></span>
             Live view of your city
           </div>
         </div>
@@ -360,7 +330,7 @@
   </section>
 
   <script>
-    // Typewriter effect for headline
+    // typewriter effect for the headline
     function typeWriter(text) {
       const el = document.getElementById("headline");
       el.textContent = "";
@@ -380,7 +350,7 @@
     let geocoder;
 
     function initMap() {
-      const defaultCenter = { lat: 35.9253, lng: -86.8689 };
+      const defaultCenter = { lat: 35.9253, lng: -86.8689 }; // Franklin-ish
 
       map = new google.maps.Map(document.getElementById("map"), {
         center: defaultCenter,
@@ -491,7 +461,7 @@
     }
   </script>
 
-  <!-- Google Maps JS with your key -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF7OU8d3VUhHYElrNxCnnaTXnTHRsPnz0&callback=initMap" async defer></script>
+  <!-- Google Maps JS - replace placeholder with your real key -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
 </body>
 </html>
