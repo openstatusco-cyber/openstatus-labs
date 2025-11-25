@@ -21,73 +21,85 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
+      font-family: system-ui, -apple-system, "Poppins", sans-serif;
       background: #000;
       color: #fff;
     }
 
-    /* HERO LAYOUT */
+    /* HERO WRAPPER */
     .hero {
       min-height: 100vh;
-      padding: 48px 7vw 40px;
-      background:
-        radial-gradient(circle at 70% 0%, rgba(116,163,109,0.4), transparent 55%),
-        #000;
+      padding: 60px 7vw 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      text-align: center;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,242,193,0.14), transparent 60%),
+        radial-gradient(circle at 90% 30%, rgba(184,208,255,0.16), transparent 70%),
+        radial-gradient(circle at 40% 90%, rgba(116,163,109,0.18), transparent 80%),
+        #000;
+      animation: shiftGradient 16s ease-in-out infinite;
+    }
+
+    @keyframes shiftGradient {
+      0% {
+        background:
+          radial-gradient(circle at 20% 0%, rgba(255,242,193,0.14), transparent 60%),
+          radial-gradient(circle at 90% 30%, rgba(184,208,255,0.16), transparent 70%),
+          radial-gradient(circle at 40% 90%, rgba(116,163,109,0.18), transparent 80%),
+          #000;
+      }
+      50% {
+        background:
+          radial-gradient(circle at 40% 10%, rgba(248,174,157,0.14), transparent 60%),
+          radial-gradient(circle at 80% 60%, rgba(255,242,193,0.16), transparent 70%),
+          radial-gradient(circle at 30% 80%, rgba(116,163,109,0.22), transparent 80%),
+          #000;
+      }
+      100% {
+        background:
+          radial-gradient(circle at 20% 0%, rgba(255,242,193,0.14), transparent 60%),
+          radial-gradient(circle at 90% 30%, rgba(184,208,255,0.16), transparent 70%),
+          radial-gradient(circle at 40% 90%, rgba(116,163,109,0.18), transparent 80%),
+          #000;
+      }
     }
 
     .hero-inner {
-      max-width: 1200px;
       width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        padding: 32px 6vw 40px;
-      }
-
-      .hero-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 28px;
-      }
-    }
-
-    /* LEFT SIDE */
-    .hero-left {
-      flex: 1;
-      max-width: 520px;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
     .eyebrow {
       font-size: 0.9rem;
       letter-spacing: 0.16em;
+      color: #cccccc;
+      margin-bottom: 12px;
       text-transform: uppercase;
-      color: #bbbbbb;
-      margin-bottom: 8px;
     }
 
     .hero-title {
-      position: relative;
-      display: inline-block;
-      font-size: clamp(2.6rem, 4vw, 3.6rem);
+      font-size: clamp(2.6rem, 4vw, 3.4rem);
       font-weight: 600;
-      line-height: 1.05;
       margin-bottom: 20px;
+      white-space: nowrap;
+    }
+
+    /* On very small screens let it wrap gracefully */
+    @media (max-width: 480px) {
+      .hero-title {
+        white-space: normal;
+        font-size: 2.1rem;
+      }
     }
 
     #typewriter-cursor {
       display: inline-block;
       width: 1px;
       height: 1em;
-      background: #ffffff;
+      background: #fff;
       margin-left: 4px;
       animation: blink 0.9s steps(1) infinite;
       vertical-align: bottom;
@@ -99,101 +111,39 @@
     }
 
     .hero-sub {
-      font-size: 1rem;
-      color: #d9d9d9;
-      margin-bottom: 26px;
+      font-size: 1.05rem;
+      color: #d8d8d8;
+      margin: 0 auto 36px;
+      max-width: 520px;
+      line-height: 1.5;
     }
 
-    /* GRADIENT UNDERLINE */
-    .hero-title .underline {
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      height: 5px;
-      width: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg,
-        var(--os-yellow),
-        var(--os-pink),
-        var(--os-blue),
-        var(--os-green)
-      );
-      background-size: 200% 100%;
-      opacity: 0;
-      transform-origin: left center;
-      transform: scaleX(0);
-      pointer-events: none;
-    }
-
-    .hero-title .underline::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: inherit;
-      opacity: 0;
-      transform-origin: center center;
-    }
-
-    @keyframes drawUnderline {
-      0%   { transform: scaleX(0); opacity: 0; }
-      60%  { transform: scaleX(1.02); opacity: 1; }
-      100% { transform: scaleX(1); opacity: 1; }
-    }
-
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes rippleWave {
-      0%   { opacity: 0.45; transform: scaleX(1); }
-      100% { opacity: 0; transform: scaleX(1.15); }
-    }
-
-    .hero-title.underline-active .underline {
-      animation:
-        drawUnderline 0.9s ease-out forwards,
-        gradientShift 8s ease-in-out 0.4s infinite;
-    }
-
-    .hero-title.underline-active .underline::after {
-      animation: rippleWave 0.7s ease-out 0.3s forwards;
-    }
-
-    .hero-title.underline-hide .underline {
-      opacity: 0;
-      transition: opacity 0.6s ease-out;
-    }
-
-    /* DOWNLOAD BUTTON – BLACK WITH GLOW */
+    /* DOWNLOAD BUTTON */
     .download-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 32px;
+      padding: 16px 34px;
       border-radius: 999px;
-      font-size: 0.96rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      background: #000;
       border: 1px solid #ffffff33;
-      color: #ffffff;
-      background: #050505;
+      color: #fff;
       text-decoration: none;
       box-shadow:
-        0 0 0 1px rgba(255,255,255,0.05),
-        0 0 22px rgba(180,193,239,0.45),
-        0 24px 40px rgba(0,0,0,0.8);
-      transform: scale(0.96);
+        0 0 20px rgba(180,193,239,0.35),
+        0 20px 40px rgba(0,0,0,0.7);
       opacity: 0;
+      transform: scale(0.96);
       transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease,
-        opacity 0.4s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
         background 0.2s ease,
-        border-color 0.2s ease;
+        border-color 0.2s ease,
+        opacity 0.4s ease;
     }
 
     .download-btn.pop-in {
@@ -203,109 +153,11 @@
 
     .download-btn:hover {
       background: #111111;
-      border-color: rgba(255,255,255,0.4);
+      border-color: rgba(255,255,255,0.5);
+      box-shadow:
+        0 0 26px rgba(180,193,239,0.65),
+        0 26px 55px rgba(0,0,0,0.9);
       transform: scale(1.03) translateY(-1px);
-      box-shadow:
-        0 0 26px rgba(180,193,239,0.7),
-        0 30px 55px rgba(0,0,0,0.9);
-    }
-
-    /* RIGHT SIDE – PHONE FRAME */
-    .hero-right {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .phone-wrapper {
-      position: relative;
-      width: min(320px, 70vw);
-      animation: floatPhone 8s ease-in-out infinite;
-      transform-origin: center center;
-      cursor: pointer;
-    }
-
-    .phone-glow {
-      position: absolute;
-      inset: 12%;
-      background: radial-gradient(circle, rgba(116,163,109,0.7), transparent 60%);
-      filter: blur(30px);
-      z-index: 0;
-    }
-
-    .phone-frame {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      aspect-ratio: 1170 / 2532; /* iPhone-ish */
-      border-radius: 36px;
-      padding: 6px;
-      background: #000;
-      box-shadow:
-        0 24px 55px rgba(0,0,0,0.9),
-        0 0 0 1px rgba(255,255,255,0.05);
-      overflow: hidden;
-    }
-
-    .phone-notch {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 16px;
-      border-radius: 999px;
-      background: #000;
-      z-index: 2;
-    }
-
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 30px;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .phone-screen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    @keyframes floatPhone {
-      0%   { transform: translateY(0) rotate(-3deg); }
-      50%  { transform: translateY(-12px) rotate(-1deg); }
-      100% { transform: translateY(0) rotate(-3deg); }
-    }
-
-    .phone-wrapper:hover {
-      transform: translateY(-8px) rotate(-3deg) scale(1.02);
-      transition: transform 0.28s ease;
-    }
-
-    @media (max-width: 900px) {
-      .hero-right {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .phone-wrapper {
-        width: min(260px, 70vw);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .phone-wrapper {
-        width: min(220px, 78vw);
-        animation: floatPhone 10s ease-in-out infinite;
-      }
-
-      .phone-frame {
-        border-radius: 32px;
-      }
     }
   </style>
 </head>
@@ -313,100 +165,37 @@
 
   <section class="hero">
     <div class="hero-inner">
+      <div class="eyebrow">Small businesses · Real time</div>
 
-      <!-- LEFT SIDE -->
-      <div class="hero-left">
-        <div class="eyebrow">Small businesses · Real time</div>
+      <h1 class="hero-title">
+        <span id="typewriter-text"></span>
+        <span id="typewriter-cursor"></span>
+      </h1>
 
-        <h1 class="hero-title">
-          <span id="typewriter-text"></span>
-          <span id="typewriter-cursor"></span>
-          <span class="underline"></span>
-        </h1>
+      <p class="hero-sub">
+        Discover what is open, closing early, and happening right now at local businesses near you.
+      </p>
 
-        <p class="hero-sub">
-          Find small businesses near you and see what is open, closing early, and happening right now.
-        </p>
-
-        <a href="#" id="download-btn" class="download-btn">
-          Download OpenStatus
-        </a>
-      </div>
-
-      <!-- RIGHT SIDE -->
-      <div class="hero-right">
-        <div class="phone-wrapper">
-          <div class="phone-glow"></div>
-
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <!-- your screenshot -->
-              <img src="./IMG_8314.PNG" alt="OpenStatus app" />
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <a href="#" id="download-btn" class="download-btn">
+        Download OpenStatus
+      </a>
     </div>
   </section>
 
   <script>
-    // ---------- TYPEWRITER + UNDERLINE ----------
-    const typeText = "Introducing OpenStatus.";
-    const typeTarget = document.getElementById("typewriter-text");
-    const titleEl = document.querySelector(".hero-title");
+    // TYPEWRITER
+    const text = "Introducing OpenStatus.";
+    const target = document.getElementById("typewriter-text");
 
-    let hasPlayedInitialUnderline = false;
-    let lastScrollY = window.scrollY;
-
-    function playUnderline() {
-      // reset classes to restart animation
-      titleEl.classList.remove("underline-active", "underline-hide");
-      // force reflow
-      void titleEl.offsetWidth;
-      titleEl.classList.add("underline-active");
-
-      setTimeout(() => {
-        titleEl.classList.add("underline-hide");
-      }, 1800);
-    }
-
-    function typeWriter(i = 0) {
-      if (i <= typeText.length) {
-        typeTarget.textContent = typeText.slice(0, i);
-
-        if (i === typeText.length) {
-          setTimeout(() => {
-            playUnderline();
-            hasPlayedInitialUnderline = true;
-          }, 250);
-        }
-
-        setTimeout(() => typeWriter(i + 1), 60);
+    function typeWrite(i = 0) {
+      if (i <= text.length) {
+        target.textContent = text.slice(0, i);
+        setTimeout(() => typeWrite(i + 1), 70);
       }
     }
-    typeWriter();
+    typeWrite();
 
-    // underline reappears only when scrolling back up and hero re-enters view
-    const heroObserver = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && hasPlayedInitialUnderline) {
-            const scrollingUp = window.scrollY < lastScrollY;
-            if (scrollingUp) {
-              playUnderline();
-            }
-          }
-        });
-        lastScrollY = window.scrollY;
-      },
-      { threshold: 0.6 }
-    );
-
-    heroObserver.observe(titleEl);
-
-    // ---------- DOWNLOAD BUTTON POP-IN ----------
+    // DOWNLOAD BUTTON POP IN
     const downloadBtn = document.getElementById("download-btn");
     const btnObserver = new IntersectionObserver(
       entries => {
@@ -421,14 +210,13 @@
     );
     btnObserver.observe(downloadBtn);
 
-    // ---------- DEVICE-BASED STORE REDIRECT ----------
-    // Replace these URLs with your real store links
-    const APP_STORE_URL  = "https://apps.apple.com";             // TODO
-    const PLAY_STORE_URL = "https://play.google.com/store";      // TODO
+    // DEVICE BASED STORE REDIRECT
+    // Replace these with your real links
+    const APP_STORE_URL  = "https://apps.apple.com";
+    const PLAY_STORE_URL = "https://play.google.com/store";
 
     function getPlatform() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
-
       if (/android/i.test(ua)) return "android";
       if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "ios";
       return "other";
@@ -438,10 +226,8 @@
       e.preventDefault();
       const platform = getPlatform();
       let url = APP_STORE_URL;
-
       if (platform === "android") url = PLAY_STORE_URL;
       if (platform === "ios")     url = APP_STORE_URL;
-
       window.open(url, "_blank");
     });
   </script>
