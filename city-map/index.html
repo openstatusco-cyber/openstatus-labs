@@ -2,466 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>OpenStatus – Love Your City</title>
+  <title>OpenStatus Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    * {
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
-      background: #ffffff;
-      color: #232323;
-      min-height: 100vh;
-    }
-
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
       overflow: hidden;
     }
 
-    /* Map as background */
     #map {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
-    }
-
-    /* Brand color tint over map */
-    .overlay-gradient {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 0%, rgba(255,242,193,0.9), transparent 55%),
-        radial-gradient(circle at 80% 100%, rgba(180,193,239,0.7), transparent 55%),
-        linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.85) 35%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Content layer */
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 20px 20px 28px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    @media (max-width: 900px) {
-      .hero-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding: 18px 14px 22px;
-      }
-    }
-
-    /* Left text card */
-    .text-block {
-      max-width: 520px;
-      background: rgba(255,255,255,0.94);
-      padding: 16px 18px 18px;
-      border-radius: 20px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.12);
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #F3F2F2;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-    }
-
-    .pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #74a36d;
-      box-shadow: 0 0 0 3px rgba(116,163,109,0.25);
-    }
-
-    .headline {
-      font-size: 2.1rem;
-      line-height: 1.1;
-      margin-bottom: 8px;
-      min-height: 2.6em; /* room for typewriter */
-    }
-
-    .headline span.city {
-      color: #74a36d;
-    }
-
-    .subcopy {
-      font-size: 0.96rem;
-      color: #444;
-      margin-bottom: 10px;
-    }
-
-    .city-line {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 14px;
-    }
-
-    .buttons-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn-store {
-      border-radius: 999px;
-      border: 1px solid #232323;
-      padding: 10px 18px;
-      min-width: 190px;
-      text-align: center;
-      font-size: 0.9rem;
-      font-weight: 500;
-      background: #ffffff;
-      color: #232323;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .btn-store:hover {
-      background: #232323;
-      color: #ffffff;
-    }
-
-    .footnote {
-      margin-top: 6px;
-      font-size: 0.74rem;
-      color: #777;
-    }
-
-    @media (max-width: 900px) {
-      .headline {
-        font-size: 1.8rem;
-      }
-      .text-block {
-        max-width: 100%;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      }
-    }
-
-    /* Right: floating app card instead of fake phone */
-    .app-block {
-      position: relative;
-      flex: 0 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .app-card-wrapper {
-      position: relative;
-      width: min(320px, 62vw);
-      animation: cardFloat 8s ease-in-out infinite;
-      transform-origin: center center;
-    }
-
-    .app-card-shadow {
-      position: absolute;
-      width: 72%;
-      height: 18px;
-      background: rgba(0,0,0,0.28);
-      filter: blur(12px);
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 999px;
-      z-index: -1;
-      animation: shadowSquish 8s ease-in-out infinite;
-    }
-
-    .app-card {
-      width: 100%;
-      aspect-ratio: 9 / 18;
-      border-radius: 32px;
-      overflow: hidden;
-      background: #000;
-      box-shadow:
-        0 18px 45px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(0,0,0,0.08);
-      position: relative;
-    }
-
-    .app-screen {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20px; /* adjust vertical position of screenshot */
-      display: block;
-    }
-
-    .app-pill {
-      position: absolute;
-      bottom: -14px;
-      right: -4px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.96);
-      box-shadow: 0 12px 26px rgba(0,0,0,0.2);
-      font-size: 0.76rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      pointer-events: auto;
-    }
-
-    .app-pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #74a36d;
-    }
-
-    @media (max-width: 900px) {
-      .app-block {
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-      }
-      .app-card-wrapper {
-        width: 58vw;
-        max-width: 260px;
-      }
-      .app-pill {
-        bottom: -10px;
-        right: 10px;
-      }
-    }
-
-    /* Animations */
-    @keyframes cardFloat {
-      0%   { transform: translateY(0px) rotate(0deg); }
-      25%  { transform: translateY(-7px) rotate(-0.45deg); }
-      50%  { transform: translateY(-3px) rotate(0.35deg); }
-      75%  { transform: translateY(-8px) rotate(-0.3deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
-    }
-
-    @keyframes shadowSquish {
-      0%   { transform: translateX(-50%) scaleX(1); opacity: 0.9; }
-      25%  { transform: translateX(-50%) scaleX(0.93); opacity: 0.82; }
-      50%  { transform: translateX(-50%) scaleX(0.97); opacity: 0.86; }
-      75%  { transform: translateX(-50%) scaleX(0.9); opacity: 0.8; }
-      100% { transform: translateX(-50%) scaleX(1); opacity: 0.9; }
     }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <div id="map"></div>
-    <div class="overlay-gradient"></div>
 
-    <div class="hero-inner">
-      <!-- LEFT: TEXT -->
-      <div class="text-block">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          Built for local explorers & small businesses
-        </div>
-
-        <h1 class="headline" id="headline">
-          Hey, we love your city.
-        </h1>
-
-        <p class="subcopy">
-          OpenStatus shows live updates from small businesses in your area - hours, last minute changes,
-          pop ups, and more, so you always know what is open before you go.
-        </p>
-
-        <p class="city-line" id="cityLine">
-          We will use your location to find great spots near you.
-        </p>
-
-        <div class="buttons-row">
-          <a href="#" class="btn-store">Google Play Store</a>
-          <a href="#" class="btn-store">Apple App Store</a>
-        </div>
-
-        <p class="footnote">
-          Store links are placeholders - swap them for your real download URLs when you are ready.
-        </p>
-      </div>
-
-      <!-- RIGHT: FLOATING APP CARD -->
-      <div class="app-block">
-        <div class="app-card-wrapper">
-          <div class="app-card-shadow"></div>
-          <div class="app-card">
-            <img
-              src="./IMG_8314.PNG"
-              alt="OpenStatus app screen"
-              class="app-screen"
-            />
-          </div>
-          <div class="app-pill">
-            <span class="app-pill-dot"></span>
-            Live view of your city
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div id="map"></div>
 
   <script>
-    // typewriter effect for the headline
-    function typeWriter(text) {
-      const el = document.getElementById("headline");
-      el.textContent = "";
-      let i = 0;
-
-      function tick() {
-        if (i < text.length) {
-          el.textContent += text.charAt(i);
-          i++;
-          setTimeout(tick, 45);
-        }
-      }
-      tick();
-    }
-
     let map;
-    let geocoder;
 
     function initMap() {
-      const defaultCenter = { lat: 35.9253, lng: -86.8689 }; // Franklin-ish
+      const fallbackCenter = { lat: 35.9253, lng: -86.8689 }; // Franklin
 
       map = new google.maps.Map(document.getElementById("map"), {
-        center: defaultCenter,
+        center: fallbackCenter,
         zoom: 5,
         disableDefaultUI: true,
-        styles: [
-          {
-            elementType: "geometry",
-            stylers: [{ color: "#F3F2F2" }]
-          },
-          {
-            featureType: "water",
-            elementType: "geometry",
-            stylers: [{ color: "#b4c1ef" }]
-          },
-          {
-            featureType: "road",
-            elementType: "geometry",
-            stylers: [{ color: "#ffffff" }]
-          },
-          {
-            featureType: "poi",
-            elementType: "geometry",
-            stylers: [{ color: "#fff2c1" }]
-          },
-          {
-            featureType: "poi.park",
-            elementType: "geometry",
-            stylers: [{ color: "#74a36d" }]
-          },
-          {
-            featureType: "administrative",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#555555" }]
-          },
-          {
-            featureType: "road",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#777777" }]
-          }
-        ]
       });
 
-      geocoder = new google.maps.Geocoder();
-
-      if ("geolocation" in navigator) {
+      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          (position) => {
+          (pos) => {
             const coords = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
             };
-            centerMapOnUser(coords);
-            reverseGeocode(coords);
+
+            map.setZoom(12);
+            map.setCenter(coords);
+
+            new google.maps.Marker({
+              position: coords,
+              map: map,
+              title: "You are here",
+            });
           },
           () => {
-            typeWriter("Hey, we love your city.");
+            // User blocked location — keep fallback
           }
         );
-      } else {
-        typeWriter("Hey, we love your city.");
       }
-    }
-
-    function centerMapOnUser(coords) {
-      map.setZoom(12);
-      map.panTo(coords);
-
-      new google.maps.Marker({
-        position: coords,
-        map,
-        title: "You are here",
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 8,
-          fillColor: "#74a36d",
-          fillOpacity: 1,
-          strokeWeight: 2,
-          strokeColor: "#ffffff"
-        }
-      });
-    }
-
-    function reverseGeocode(coords) {
-      if (!geocoder) return;
-
-      geocoder.geocode({ location: coords }, (results, status) => {
-        if (status === "OK" && results && results[0]) {
-          let city = "";
-          let state = "";
-          const comps = results[0].address_components;
-
-          comps.forEach((c) => {
-            if (c.types.includes("locality")) city = c.long_name;
-            if (c.types.includes("administrative_area_level_1")) state = c.short_name;
-          });
-
-          const cityState = city && state ? `${city}, ${state}` : city || state || "your area";
-
-          document.getElementById("cityLine").textContent =
-            `Right now we are looking around ${cityState} for small businesses.`;
-
-          typeWriter(`Hey, we love your city, ${cityState}.`);
-        } else {
-          typeWriter("Hey, we love your city.");
-        }
-      });
     }
   </script>
 
-  <!-- Google Maps JS - replace placeholder with your real key -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+  <!-- Replace YOUR_KEY_HERE -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE&callback=initMap" async defer></script>
+
 </body>
 </html>
