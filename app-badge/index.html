@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OpenStatus App Badge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --os-green: #74a36d;
+      --os-yellow: #fff2c1;
+      --os-pink: #F8AE9D;
+      --os-blue: #b4c1ef;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Poppins", sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    /* Center the badge on the page */
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,242,193,0.14), transparent 60%),
+        radial-gradient(circle at 90% 30%, rgba(184,208,255,0.16), transparent 70%),
+        radial-gradient(circle at 40% 90%, rgba(116,163,109,0.18), transparent 80%),
+        #000;
+    }
+
+    .badge-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #dedede;
+    }
+
+    .app-icon-wrapper {
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+
+    .app-icon-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg,
+        var(--os-yellow),
+        var(--os-pink),
+        var(--os-blue),
+        var(--os-green)
+      );
+      padding: 2px;
+      animation: floatIcon 5s ease-in-out infinite;
+    }
+
+    .app-icon-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .app-icon-pulse {
+      position: absolute;
+      inset: -5px;
+      border-radius: 16px;
+      border: 1px solid rgba(180,193,239,0.0);
+      animation: pulseRing 3.4s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatIcon {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-4px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes pulseRing {
+      0%   { transform: scale(0.9); opacity: 0.0; border-color: rgba(180,193,239,0.0); }
+      35%  { transform: scale(1.05); opacity: 0.55; border-color: rgba(180,193,239,0.6); }
+      100% { transform: scale(1.25); opacity: 0; border-color: rgba(180,193,239,0.0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="badge-row">
+      <div class="app-icon-wrapper">
+        <div class="app-icon-ring">
+          <!-- Inner content: you can swap "OS" for a logo later -->
+          <div class="app-icon-inner">OS</div>
+        </div>
+        <div class="app-icon-pulse"></div>
+      </div>
+
+      <span>OpenStatus · Mobile app for iOS &amp; Android</span>
+    </div>
+  </div>
+
+</body>
+</html>
