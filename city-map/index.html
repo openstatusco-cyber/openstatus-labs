@@ -27,12 +27,12 @@
     let map;
 
     function initMap() {
-      const fallbackCenter = { lat: 35.9253, lng: -86.8689 }; // Franklin
+      const fallbackCenter = { lat: 35.9253, lng: -86.8689 }; // Franklin TN ish
 
       map = new google.maps.Map(document.getElementById("map"), {
         center: fallbackCenter,
         zoom: 5,
-        disableDefaultUI: true,
+        disableDefaultUI: true
       });
 
       if (navigator.geolocation) {
@@ -40,7 +40,7 @@
           (pos) => {
             const coords = {
               lat: pos.coords.latitude,
-              lng: pos.coords.longitude,
+              lng: pos.coords.longitude
             };
 
             map.setZoom(12);
@@ -49,19 +49,19 @@
             new google.maps.Marker({
               position: coords,
               map: map,
-              title: "You are here",
+              title: "You are here"
             });
           },
           () => {
-            // User blocked location — keep fallback
+            // user blocked location or error, we just stick with fallback
           }
         );
       }
     }
   </script>
 
-  <!-- Replace YOUR_KEY_HERE -->
-  <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBF7OU8d3VUhHYElrNxCnnaTXnTHRsPnz0" async defer></script>
+  <!-- Google Maps script: API key goes here -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF7OU8d3VUhHYElrNxCnnaTXnTHRsPnz0&callback=initMap" async defer></script>
 
 </body>
 </html>
